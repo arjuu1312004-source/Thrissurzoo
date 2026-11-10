@@ -54,12 +54,18 @@ function initWatchHeroScrubber() {
   const progressBar = document.getElementById('watchProgressBar');
   const spillPrimary = document.getElementById('watchSpillPrimary');
   const spillGold = document.getElementById('watchSpillGold');
+  const stages = [
+    document.getElementById('watchStage1'),
+    document.getElementById('watchStage2'),
+    document.getElementById('watchStage3'),
+    document.getElementById('watchStage4')
+  ];
   const scrollIndicator = document.getElementById('watchScrollIndicator');
 
   if (!canvas || !container) return;
 
   const ctx = canvas.getContext('2d');
-  const frameCount = 75;
+  const frameCount = 299;
   const images = [];
   let loadedCount = 0;
   let currentFrameIndex = 1;
@@ -67,7 +73,7 @@ function initWatchHeroScrubber() {
 
   function getFrameSrc(index) {
     const pad = String(index).padStart(3, '0');
-    return `assets/frame/ezgif-frame-${pad}.jpg`;
+    return `assets/frame1/ezgif-frame-${pad}.jpg`;
   }
 
   function resizeCanvas() {
@@ -91,10 +97,10 @@ function initWatchHeroScrubber() {
 
     const w = window.innerWidth;
     const h = window.innerHeight;
-    const imgW = img.naturalWidth;
-    const imgH = img.naturalHeight;
+    const imgW = img.naturalWidth || 1920;
+    const imgH = img.naturalHeight || 1080;
 
-    // Cover logic with centered positioning so exploded parts fill the display majestically
+    // Cover logic with centered positioning so exploded watch parts fill the display majestically
     const scale = Math.max(w / imgW, h / imgH);
     const renderW = imgW * scale;
     const renderH = imgH * scale;
@@ -105,21 +111,21 @@ function initWatchHeroScrubber() {
     ctx.drawImage(img, offsetX, offsetY, renderW, renderH);
   }
 
-  // Preload all 75 frames (only 2.5 MB total payload)
+  // Preload frames progressively (first 25 frames prioritize initial viewport reveal)
   for (let i = 1; i <= frameCount; i++) {
     const img = new Image();
     img.src = getFrameSrc(i);
     img.onload = () => {
       loadedCount++;
-      if (progressBar && loadedCount <= 20) {
-        const percent = Math.min(100, Math.round((loadedCount / 15) * 100));
+      if (progressBar && loadedCount <= 30) {
+        const percent = Math.min(100, Math.round((loadedCount / 25) * 100));
         progressBar.style.width = `${percent}%`;
       }
       if (loadedCount === 1) {
         resizeCanvas();
         render(1);
       }
-      if (loadedCount >= 15 && loader) {
+      if (loadedCount >= 20 && loader) {
         loader.classList.add('hidden');
       }
     };
@@ -129,12 +135,12 @@ function initWatchHeroScrubber() {
   window.addEventListener('resize', resizeCanvas);
   resizeCanvas();
 
-  // Safety fallback: reveal viewport after 1.5s
+  // Safety fallback: reveal viewport after 1.8s
   setTimeout(() => {
     if (loader && !loader.classList.contains('hidden')) {
       loader.classList.add('hidden');
     }
-  }, 1500);
+  }, 1800);
 
   // ScrollTrigger Setup
   if (typeof gsap !== 'undefined' && typeof ScrollTrigger !== 'undefined') {
@@ -148,20 +154,42 @@ function initWatchHeroScrubber() {
       onUpdate: (self) => {
         const progress = self.progress;
 
-        // Map scroll progress to 1..75 frames
+        // Map scroll progress smoothly across all 299 frames
         const targetFrame = Math.min(frameCount, Math.max(1, Math.round(progress * (frameCount - 1)) + 1));
         if (targetFrame !== currentFrameIndex) {
           currentFrameIndex = targetFrame;
           requestAnimationFrame(() => render(targetFrame));
         }
 
+        // Determine active text milestone
+        let activeIdx = 0;
+        if (progress < 0.22) {
+          activeIdx = 0; // Stage 1: Assembled Timepiece
+        } else if (progress < 0.48) {
+          activeIdx = 1; // Stage 2: Optical & Bezel Deconstruction
+        } else if (progress < 0.74) {
+          activeIdx = 2; // Stage 3: Highly Exploded Kinetic Calibre
+        } else {
+          activeIdx = 3; // Stage 4: Structural Climax
+        }
+
+        stages.forEach((stage, i) => {
+          if (stage) {
+            if (i === activeIdx) {
+              stage.classList.add('active');
+            } else {
+              stage.classList.remove('active');
+            }
+          }
+        });
+
         // Dynamic studio lighting spills
         if (spillPrimary) {
-          const spillScale = 1 + progress * 0.45;
+          const spillScale = 1 + progress * 0.5;
           spillPrimary.style.transform = `translate(-50%, -50%) scale(${spillScale})`;
         }
         if (spillGold) {
-          const goldOpacity = 0.35 + progress * 0.55;
+          const goldOpacity = 0.35 + progress * 0.6;
           spillGold.style.opacity = String(goldOpacity);
         }
 
