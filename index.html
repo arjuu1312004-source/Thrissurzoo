@@ -1,0 +1,685 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Thrissur Zoological Park (Puthur) | Conservation Development Society</title>
+  <meta name="description" content="Explore India's first designer zoo at Puthur, Thrissur. Book entry passes online, view live Jeevdarshini feeds, check ticket rates, and plan your visit.">
+  <meta name="keywords" content="Thrissur Zoological Park, Puthur Zoo, Thrissur Zoo booking, Kerala eco safari, Puthur Zoo entry fees">
+  <link rel="canonical" href="https://tzp-cds.com/">
+  <link rel="icon" type="image/png" href="assets/images/TZP-LOGO-TRANS.png">
+
+  <!-- Core Theme Stylesheet -->
+  <link rel="stylesheet" href="css/theme.css">
+
+  <!-- Schema.org Structured Data -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "TouristAttraction",
+    "name": "Thrissur Zoological Park",
+    "alternateName": "Puthur Zoological Park",
+    "url": "https://tzp-cds.com",
+    "logo": "assets/images/TZP-LOGO-TRANS.png",
+    "image": "assets/images/banner1.jpg",
+    "description": "India's first designer zoo spread over 336 acres in Puthur, Thrissur, featuring natural habitats and eco-friendly safari infrastructure.",
+    "address": {
+      "@type": "PostalAddress",
+      "streetAddress": "Puthur",
+      "addressLocality": "Thrissur",
+      "addressRegion": "Kerala",
+      "postalCode": "680014",
+      "addressCountry": "IN"
+    },
+    "openingHoursSpecification": [
+      {
+        "@type": "OpeningHoursSpecification",
+        "dayOfWeek": ["Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"],
+        "opens": "09:00",
+        "closes": "17:00"
+      }
+    ]
+  }
+  </script>
+</head>
+<body>
+
+  <!-- ==============================================================================
+       1. FLOATING FROSTED PILL NAVIGATION (Zooxia style)
+       ============================================================================== -->
+  <div class="nav-wrapper">
+    <nav class="nav-pill">
+      <a href="index.html" class="nav-logo-group">
+        <img src="assets/images/TZP-LOGO-TRANS.png" alt="Thrissur Zoological Park Logo">
+        <div>
+          <span class="nav-logo-text">Thrissur Zoo</span>
+          <span class="nav-logo-sub">Puthur Sanctuary</span>
+        </div>
+      </a>
+
+      <ul class="nav-menu">
+        <li><a href="index.html" class="nav-link active">About Us</a></li>
+        <li><a href="visit-us.html" class="nav-link">Visit Us</a></li>
+        <li><a href="virtual-tour.html" class="nav-link">Virtual Tour</a></li>
+        <li><a href="events.html" class="nav-link">Events</a></li>
+        <li><a href="research.html" class="nav-link">Research Centre</a></li>
+      </ul>
+
+      <div style="display: flex; align-items: center; gap: 12px;">
+        <a href="https://tzp-cds.com/book/" class="nav-cta-btn" target="_blank" rel="noopener noreferrer">
+          <span>Book Tickets</span>
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+            <line x1="7" y1="17" x2="17" y2="7"></line>
+            <polyline points="7 7 17 7 17 17"></polyline>
+          </svg>
+        </a>
+
+        <button class="mobile-menu-btn" id="mobileNavToggle" aria-label="Toggle Navigation">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <line x1="3" y1="12" x2="21" y2="12"></line>
+            <line x1="3" y1="6" x2="21" y2="6"></line>
+            <line x1="3" y1="18" x2="21" y2="18"></line>
+          </svg>
+        </button>
+      </div>
+    </nav>
+  </div>
+
+  <!-- Mobile Fullscreen Drawer Navigation -->
+  <div class="mobile-nav-drawer" id="mobileNavDrawer">
+    <div>
+      <div style="display: flex; justify-content: space-between; align-items: center;">
+        <div class="nav-logo-group">
+          <img src="assets/images/TZP-LOGO-TRANS.png" alt="Logo">
+          <span class="nav-logo-text">Thrissur Zoo</span>
+        </div>
+        <button id="closeMobileNav" style="background: none; border: none; font-size: 28px; cursor: pointer; color: var(--color-green);">&times;</button>
+      </div>
+
+      <ul class="mobile-nav-links">
+        <li><a href="index.html" class="mobile-nav-link">About Us</a></li>
+        <li><a href="visit-us.html" class="mobile-nav-link">Visit Us</a></li>
+        <li><a href="virtual-tour.html" class="mobile-nav-link">Virtual Tour</a></li>
+        <li><a href="events.html" class="mobile-nav-link">Events</a></li>
+        <li><a href="research.html" class="mobile-nav-link">Research Centre</a></li>
+      </ul>
+    </div>
+
+    <div>
+      <a href="https://tzp-cds.com/book/" class="btn-primary" style="width: 100%; text-align: center; margin-bottom: 16px;" target="_blank">Book Online Passes ↗</a>
+      <p style="font-size: 0.78rem; color: var(--color-secondary); text-align: center;">Official Conservation Portal • Kerala Forest Dept</p>
+    </div>
+  </div>
+
+  <!-- Vertical Dot Navigation (Goodwish style) -->
+  <div class="vertical-dot-nav" aria-label="Section Navigation">
+    <button class="dot-nav-item active" title="Hero Viewport" aria-label="Hero"></button>
+    <button class="dot-nav-item" title="Quick Links" aria-label="Quick Access"></button>
+    <button class="dot-nav-item" title="Welcome & Pillars" aria-label="Welcome"></button>
+    <button class="dot-nav-item" title="Photo Gallery" aria-label="Gallery"></button>
+    <button class="dot-nav-item" title="Visitor Information" aria-label="Tariff & Rules"></button>
+  </div>
+
+  <!-- ==============================================================================
+       2. SCROLL-DRIVEN WATCH EXPLODED HERO (Product Experience)
+       ============================================================================== -->
+  <section class="watch-hero-container" id="watchHeroContainer">
+    <div class="watch-pinned-viewport">
+      
+      <!-- Luxury Studio Lighting Spills & Ambiance -->
+      <div class="watch-lighting-spill spill-primary" id="watchSpillPrimary"></div>
+      <div class="watch-lighting-spill spill-gold" id="watchSpillGold"></div>
+      <div class="watch-lighting-spill spill-accent"></div>
+      <div class="watch-ambient-vignette"></div>
+
+      <!-- Luxury Preloader -->
+      <div class="watch-loader" id="watchLoader">
+        <span class="watch-loader-title">CALIBRE DECONSTRUCTION LOADING</span>
+        <div class="watch-loader-track">
+          <div class="watch-loader-bar" id="watchProgressBar"></div>
+        </div>
+      </div>
+
+      <!-- Main Canvas for 75 Exploded Watch Frames -->
+      <canvas id="watchCanvas"></canvas>
+
+      <!-- Soft bottom gradient blending into next section -->
+      <div class="watch-bottom-fade"></div>
+
+      <!-- Scroll Action Prompt -->
+      <div class="watch-scroll-indicator" id="watchScrollIndicator">
+        <span>Scroll to Explode</span>
+        <div class="scroll-indicator-line"></div>
+      </div>
+
+    </div>
+  </section>
+
+    </div>
+  </section>
+
+  <!-- ==============================================================================
+       3. QUICK-LINK TILES (Overlapping End of Hero)
+       ============================================================================== -->
+  <section class="quick-links-overlap" id="quickAccessSection">
+    <div class="container">
+      <div class="quick-links-grid">
+        
+        <!-- Tile 1: Book Passes -->
+        <div class="quick-tile-card">
+          <div>
+            <div class="quick-tile-icon">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <rect x="3" y="4" width="18" height="16" rx="2"></rect>
+                <line x1="7" y1="8" x2="17" y2="8"></line>
+                <line x1="7" y1="12" x2="17" y2="12"></line>
+                <line x1="7" y1="16" x2="11" y2="16"></line>
+              </svg>
+            </div>
+            <h3 class="quick-tile-title">Book Online Passes</h3>
+            <p class="quick-tile-desc">Book your visitor passes online to skip the ticketing lines and enjoy priority gate turnstile access.</p>
+          </div>
+          <a href="https://tzp-cds.com/book/" class="tile-action-link" target="_blank" rel="noopener noreferrer">
+            <span>Online Ticketing Terminal</span>
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+              <line x1="5" y1="12" x2="19" y2="12"></line>
+              <polyline points="12 5 19 12 12 19"></polyline>
+            </svg>
+          </a>
+        </div>
+
+        <!-- Tile 2: Adopt Me Program -->
+        <div class="quick-tile-card">
+          <div>
+            <div class="quick-tile-icon">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path>
+              </svg>
+            </div>
+            <h3 class="quick-tile-title">Adopt Me Program</h3>
+            <p class="quick-tile-desc">Partner with our conservation team to sponsor wildlife nutrition, medical care, and specialized habitat enrichment.</p>
+          </div>
+          <a href="https://tzp-cds.com/adoption_policy.pdf" class="tile-action-link" target="_blank" rel="noopener noreferrer">
+            <span>View Adoption Policy</span>
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+              <line x1="5" y1="12" x2="19" y2="12"></line>
+              <polyline points="12 5 19 12 12 19"></polyline>
+            </svg>
+          </a>
+        </div>
+
+        <!-- Tile 3: Jeevdarshini Live -->
+        <div class="quick-tile-card">
+          <div>
+            <div class="quick-tile-icon">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <circle cx="12" cy="12" r="2"></circle>
+                <path d="M16.24 7.76a6 6 0 0 1 0 8.49m-8.48-.01a6 6 0 0 1 0-8.49m11.31-2.82a10 10 0 0 1 0 14.14m-14.14 0a10 10 0 0 1 0-14.14"></path>
+              </svg>
+            </div>
+            <h3 class="quick-tile-title">Jeevdarshini Live Feeds</h3>
+            <p class="quick-tile-desc">Check out our real-time 9-channel camera surveillance network to watch your wild friends live in their open biomes.</p>
+          </div>
+          <a href="jeevdarshini.html" class="tile-action-link">
+            <span>Launch Live Monitor</span>
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+              <line x1="5" y1="12" x2="19" y2="12"></line>
+              <polyline points="12 5 19 12 12 19"></polyline>
+            </svg>
+          </a>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ==============================================================================
+       4. WELCOME SECTION (Ivory, City Zoo tile style with Signature Arch Mask)
+       ============================================================================== -->
+  <section class="section-spacing section-ivory" id="welcomeSection">
+    <div class="container">
+      
+      <div class="welcome-header-center">
+        <span class="overline-label">About the Sanctuary</span>
+        <h2 class="serif-heading" style="font-size: 2.5rem;">Welcome to Thrissur Zoological Park & Research Centre !</h2>
+        <div class="gold-rule gold-rule-center"></div>
+      </div>
+
+      <div class="pillars-grid">
+        
+        <!-- Pillar 1: Natural Habitats -->
+        <div class="pillar-card">
+          <div class="pillar-img-wrapper">
+            <img src="assets/images/banner2.jpg" alt="Natural Habitats" loading="lazy">
+          </div>
+          <div class="pillar-card-body">
+            <div class="pillar-icon-pill">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"></path>
+              </svg>
+            </div>
+            <h3 class="pillar-title">Natural Habitats</h3>
+            <p class="pillar-text">
+              Experience expansive zoo fields crafted layout by layout to completely mimic natural Indian jungle canopies, rock-cliffs, and river basins.
+            </p>
+          </div>
+        </div>
+
+        <!-- Pillar 2: Conservation Focus -->
+        <div class="pillar-card">
+          <div class="pillar-img-wrapper">
+            <img src="assets/images/banner8.jpg" alt="Conservation Focus" loading="lazy">
+          </div>
+          <div class="pillar-card-body">
+            <div class="pillar-icon-pill">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <circle cx="12" cy="12" r="10"></circle>
+                <path d="M12 6v6l4 2"></path>
+              </svg>
+            </div>
+            <h3 class="pillar-title">Conservation Focus</h3>
+            <p class="pillar-text">
+              Our facility operates as a core scientific haven supporting international research scholars, specialized veterinary labs, and animal rehabilitation tracks.
+            </p>
+          </div>
+        </div>
+
+        <!-- Pillar 3: Eco Transport -->
+        <div class="pillar-card">
+          <div class="pillar-img-wrapper">
+            <img src="assets/images/banner7.jpg" alt="Eco Transport" loading="lazy">
+          </div>
+          <div class="pillar-card-body">
+            <div class="pillar-icon-pill">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <rect x="1" y="3" width="15" height="13"></rect>
+                <polygon points="16 8 20 8 23 11 23 16 16 16 16 8"></polygon>
+                <circle cx="5.5" cy="18.5" r="2.5"></circle>
+                <circle cx="18.5" cy="18.5" r="2.5"></circle>
+              </svg>
+            </div>
+            <h3 class="pillar-title">Eco Transport</h3>
+            <p class="pillar-text">
+              Preserve clean oxygen levels along our trails by accessing internal electric carts and silent zero-emission utility lines deployed park-wide.
+            </p>
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ==============================================================================
+       5. GALLERY (Banner 1-10 with Captions & Lightbox)
+       ============================================================================== -->
+  <section class="section-spacing section-white" id="gallerySection">
+    <div class="container">
+      
+      <div class="welcome-header-center">
+        <span class="overline-label">Visual Journey</span>
+        <h2 class="serif-heading" style="font-size: 2.4rem;">Sanctuary Photo Gallery</h2>
+        <div class="gold-rule gold-rule-center"></div>
+      </div>
+
+      <div class="gallery-grid">
+        <div class="gallery-item span-2" data-caption="Zoo Panorama View">
+          <img src="assets/images/banner1.jpg" alt="Zoo Panorama View" loading="lazy">
+          <div class="gallery-item-caption">Zoo Panorama View</div>
+        </div>
+        <div class="gallery-item" data-caption="Wildlife Preserve Exhibit">
+          <img src="assets/images/banner2.jpg" alt="Wildlife Preserve Exhibit" loading="lazy">
+          <div class="gallery-item-caption">Wildlife Preserve Exhibit</div>
+        </div>
+        <div class="gallery-item" data-caption="Natural Canopy System">
+          <img src="assets/images/banner3.jpg" alt="Natural Canopy System" loading="lazy">
+          <div class="gallery-item-caption">Natural Canopy System</div>
+        </div>
+        <div class="gallery-item" data-caption="Deep Jungle Path">
+          <img src="assets/images/banner4.jpg" alt="Deep Jungle Path" loading="lazy">
+          <div class="gallery-item-caption">Deep Jungle Path</div>
+        </div>
+        <div class="gallery-item" data-caption="Administrative Green Plaza">
+          <img src="assets/images/banner5.jpg" alt="Administrative Green Plaza" loading="lazy">
+          <div class="gallery-item-caption">Administrative Green Plaza</div>
+        </div>
+        <div class="gallery-item" data-caption="Patience Brings the Best Sightings">
+          <img src="assets/images/banner6.jpg" alt="Patience Brings the Best Sightings" loading="lazy">
+          <div class="gallery-item-caption">Patience Brings the Best Sightings</div>
+        </div>
+        <div class="gallery-item" data-caption="Eco-Friendly Transport Options">
+          <img src="assets/images/banner7.jpg" alt="Eco-Friendly Transport Options" loading="lazy">
+          <div class="gallery-item-caption">Eco-Friendly Transport Options</div>
+        </div>
+        <div class="gallery-item span-2" data-caption="Tiger Outcrop View">
+          <img src="assets/images/banner8.jpg" alt="Tiger Outcrop View" loading="lazy">
+          <div class="gallery-item-caption">Tiger Outcrop View</div>
+        </div>
+        <div class="gallery-item" data-caption="Designer Landscape Architecture">
+          <img src="assets/images/banner9.jpg" alt="Designer Landscape Architecture" loading="lazy">
+          <div class="gallery-item-caption">Designer Landscape Architecture</div>
+        </div>
+        <div class="gallery-item" data-caption="Park Walking Loop View">
+          <img src="assets/images/banner10.jpg" alt="Park Walking Loop View" loading="lazy">
+          <div class="gallery-item-caption">Park Walking Loop View</div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ==============================================================================
+       6. VISITOR INFORMATION: TABS, TARIFF & REGULATIONS
+       ============================================================================== -->
+  <section class="section-spacing section-ivory" id="visitorInfoSection">
+    <div class="container">
+      
+      <div class="welcome-header-center">
+        <span class="overline-label">Essential Guidelines</span>
+        <h2 class="serif-heading" style="font-size: 2.4rem;">Visitor Information & Tariff</h2>
+        <div class="gold-rule gold-rule-center"></div>
+      </div>
+
+      <!-- Underline Tabs -->
+      <div class="visitor-tabs-nav">
+        <button class="visitor-tab-trigger active" data-target="tabVisitingSchedule">Visiting Schedule</button>
+        <button class="visitor-tab-trigger" data-target="tabPhotography">Photography Guidelines</button>
+        <button class="visitor-tab-trigger" data-target="tabSafety">Safety Regulations</button>
+      </div>
+
+      <!-- Tab 1: Visiting Schedule (Tariff Table) -->
+      <div id="tabVisitingSchedule" class="tab-pane-content active">
+        <div class="tariff-table-card">
+          <table class="styled-tariff-table">
+            <thead>
+              <tr>
+                <th>Visitor Category</th>
+                <th style="text-align: right;">Standard Weekday Entry Pass</th>
+                <th style="text-align: right;">Bus Ticket</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Adults (Above 12 Years)</td>
+                <td class="price-cell">₹ 70.00</td>
+                <td class="price-cell">₹ 30.00</td>
+              </tr>
+              <tr>
+                <td>Children (5 to 12 Years)</td>
+                <td class="price-cell">₹ 20.00</td>
+                <td class="price-cell">₹ 20.00</td>
+              </tr>
+              <tr>
+                <td>Sr. Citizens (Above 60 Yrs)</td>
+                <td class="price-cell">₹ 30.00</td>
+                <td class="price-cell">₹ 30.00</td>
+              </tr>
+              <tr>
+                <td>Students (Class 5 to 12 in uniform accompanied by Teacher/ Staff with authorisation from Head of the Institution)</td>
+                <td class="price-cell">₹ 20.00</td>
+                <td class="price-cell">₹ 20.00</td>
+              </tr>
+              <tr>
+                <td>Teacher/ Staff accompanying the Students (1 Teacher/ 20 Students)</td>
+                <td class="price-cell">₹ 20.00</td>
+                <td class="price-cell">₹ 30.00</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- Tab 2: Photography Guidelines -->
+      <div id="tabPhotography" class="tab-pane-content">
+        <div class="reg-card">
+          <div style="display: flex; align-items: center; gap: 12px; margin-bottom: 24px;">
+            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="var(--color-green)" stroke-width="2">
+              <path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"></path>
+              <circle cx="12" cy="13" r="4"></circle>
+            </svg>
+            <h3 style="margin-bottom: 0;">Photography & Videography Code</h3>
+          </div>
+          <ul class="tidy-icon-list">
+            <li>
+              <svg class="tidy-list-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"></polyline></svg>
+              <span>Personal mobile photography is permitted free of charge throughout public visitor pathways.</span>
+            </li>
+            <li>
+              <svg class="tidy-list-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"></polyline></svg>
+              <span>SLR / DSLR camera equipment requires a valid configuration pass layout clearance (₹350 for Still Camera & 750 for Video Camera *Subject to change*).</span>
+            </li>
+            <li>
+              <svg class="tidy-list-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"></polyline></svg>
+              <span>Commercial filmmaking, drone tracking grids, and stationary tripods require advance written approval from the Director's Office.</span>
+            </li>
+            <li>
+              <svg class="tidy-list-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"></polyline></svg>
+              <span>Flash photography is strictly forbidden near animal enclosures to prevent ethological stress.</span>
+            </li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- Tab 3: Safety Regulations -->
+      <div id="tabSafety" class="tab-pane-content">
+        <div class="reg-card">
+          <div style="display: flex; align-items: center; gap: 12px; margin-bottom: 24px;">
+            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="var(--color-green)" stroke-width="2">
+              <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
+            </svg>
+            <h3 style="margin-bottom: 0;">Visitor Safety & Park Regulations</h3>
+          </div>
+          <ul class="tidy-icon-list">
+            <li>
+              <svg class="tidy-list-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"></polyline></svg>
+              <span>Do not litter. Thrissur Zoological Park operates a strict zero-plastic mandate. Use designated green bins.</span>
+            </li>
+            <li>
+              <svg class="tidy-list-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"></polyline></svg>
+              <span>Crossing sanctuary security barriers or attempting to feed or tease fauna is a severe statutory offense.</span>
+            </li>
+            <li>
+              <svg class="tidy-list-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"></polyline></svg>
+              <span>Always stay centered along the brick-paved visitor lanes. Do not step into boundary forest buffers.</span>
+            </li>
+            <li>
+              <svg class="tidy-list-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"></polyline></svg>
+              <span>Large backpacks must be deposited at the gate complex cloakroom matrix before entry screening.</span>
+            </li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- 2-Column Icon Lists below tabs -->
+      <div class="regulations-two-col" style="margin-top: 48px;">
+        <div class="reg-card">
+          <span class="overline-label">Media Protocol</span>
+          <h3>Photography Guidelines</h3>
+          <ul class="tidy-icon-list">
+            <li>
+              <svg class="tidy-list-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="8" x2="12" y2="12"></line><line x1="12" y1="16" x2="12.01" y2="16"></line></svg>
+              <span>Personal mobile photography is free of charge across public lanes.</span>
+            </li>
+            <li>
+              <svg class="tidy-list-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="8" x2="12" y2="12"></line><line x1="12" y1="16" x2="12.01" y2="16"></line></svg>
+              <span>DSLR / Professional video gear requires valid clearance fee (₹350 Still / ₹750 Video).</span>
+            </li>
+            <li>
+              <svg class="tidy-list-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="8" x2="12" y2="12"></line><line x1="12" y1="16" x2="12.01" y2="16"></line></svg>
+              <span>No flash photography near animal habitats to avoid stress.</span>
+            </li>
+          </ul>
+        </div>
+
+        <div class="reg-card">
+          <span class="overline-label">Sanctuary Code</span>
+          <h3>Park Safety Rules</h3>
+          <ul class="tidy-icon-list">
+            <li>
+              <svg class="tidy-list-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="8" x2="12" y2="12"></line><line x1="12" y1="16" x2="12.01" y2="16"></line></svg>
+              <span>Zero plastic mandate: strictly no single-use plastics allowed.</span>
+            </li>
+            <li>
+              <svg class="tidy-list-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="8" x2="12" y2="12"></line><line x1="12" y1="16" x2="12.01" y2="16"></line></svg>
+              <span>Feeding, teasing fauna or crossing security barriers is strictly prohibited.</span>
+            </li>
+            <li>
+              <svg class="tidy-list-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="8" x2="12" y2="12"></line><line x1="12" y1="16" x2="12.01" y2="16"></line></svg>
+              <span>Deposit large luggage at the gate cloakroom before entry.</span>
+            </li>
+          </ul>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ==============================================================================
+       7. WIDE BANNER STRIP (City Zoo Banner Style)
+       ============================================================================== -->
+  <section class="section-spacing section-white" style="padding-top: 0;">
+    <div class="container">
+      <div class="cta-banner-strip">
+        <div>
+          <span class="overline-label" style="color: var(--color-gold-light);">Conservation Partnership</span>
+          <h2 class="cta-banner-title">Adopt a Wild Resident Today</h2>
+          <p class="cta-banner-desc">
+            Partner with Thrissur Zoological Park to support dietary care, veterinary medicine, and behavioral enrichment for endangered wildlife.
+          </p>
+        </div>
+        <div style="flex-shrink: 0;">
+          <a href="https://tzp-cds.com/adoption_policy.pdf" class="btn-primary" style="background-color: var(--color-white); color: var(--color-green);" target="_blank" rel="noopener noreferrer">
+            <span>Read Adoption Policy</span>
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+              <line x1="5" y1="12" x2="19" y2="12"></line>
+              <polyline points="12 5 19 12 12 19"></polyline>
+            </svg>
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==============================================================================
+       8. KUNJU CHAT ASSISTANT (White with Green Accents & Official FAQs)
+       ============================================================================== -->
+  <div class="kunju-trigger-bubble" id="kunjuTrigger" title="Chat with Kunju">
+    <div class="kunju-avatar-circle">
+      <img src="assets/images/zoo_assistant_kunju.png" alt="Kunju Assistant">
+    </div>
+    <div class="kunju-bubble-meta">
+      <h5>Kunju 💬</h5>
+      <p>Tap to Chat / Ask FAQs</p>
+    </div>
+  </div>
+
+  <div class="kunju-chat-panel" id="kunjuChatPanel">
+    <div class="chat-panel-head">
+      <div>
+        <h4>Kunju Desk</h4>
+        <span class="chat-status-dot">Online Assistant</span>
+      </div>
+      <button class="chat-close-btn" id="closeKunjuChat" aria-label="Close Chat">&times;</button>
+    </div>
+
+    <div class="chat-panel-body" id="kunjuChatBody">
+      <div class="chat-message msg-kunju">
+        Namaskar! Welcome to Thrissur Zoological Park portal. I am Kunju, your companion assistant. How can I guide your exploration tracks today?
+      </div>
+    </div>
+
+    <div class="chat-panel-faqs" id="kunjuFaqTray"></div>
+  </div>
+
+  <!-- ==============================================================================
+       9. LIGHTBOX MODAL FOR GALLERY
+       ============================================================================== -->
+  <div class="lightbox-overlay" id="lightboxOverlay">
+    <button class="lightbox-close-btn" id="closeLightbox" aria-label="Close Lightbox">&times;</button>
+    <div class="lightbox-img-box">
+      <img id="lightboxImage" src="assets/images/banner1.jpg" alt="Gallery Preview">
+    </div>
+    <div class="lightbox-caption-text" id="lightboxCaption"></div>
+  </div>
+
+  <!-- ==============================================================================
+       10. POPUP VIDEO MODAL (TZP-VIDEO-NEW.mp4)
+       ============================================================================== -->
+  <div class="video-modal-backdrop" id="videoModalOverlay">
+    <div class="video-player-card">
+      <button class="video-modal-close-btn" id="closeVideoModal" aria-label="Close Video">&times;</button>
+      <video id="zooModalVideo" controls preload="metadata" playsinline>
+        <source src="assets/video/TZP-VIDEO-NEW.mp4" type="video/mp4">
+        Your browser does not support the video tag.
+      </video>
+    </div>
+  </div>
+
+  <!-- ==============================================================================
+       11. FOOTER (Deep Forest Green with Ivory Text & Gold Lines)
+       ============================================================================== -->
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-top-grid">
+        
+        <!-- Col 1: Brand Info -->
+        <div class="footer-brand">
+          <h3>Thrissur Zoological Park</h3>
+          <div class="gold-rule" style="margin: 10px 0 16px 0;"></div>
+          <p>
+            India's first designer zoo spread over 336 acres in Puthur, Thrissur. Dedicated to barrier-free biomes, wildlife research, and eco-conservation.
+          </p>
+        </div>
+
+        <!-- Col 2: Quick Access -->
+        <div>
+          <h4 class="footer-col-title">Quick Access</h4>
+          <ul class="footer-nav-list">
+            <li><a href="index.html">About Facility</a></li>
+            <li><a href="https://tzp-cds.com/book/" target="_blank" rel="noopener noreferrer">Online Ticketing</a></li>
+            <li><a href="visit-us.html">Directions & Parking</a></li>
+          </ul>
+        </div>
+
+        <!-- Col 3: Citizen Portals -->
+        <div>
+          <h4 class="footer-col-title">Citizen Portals</h4>
+          <ul class="footer-nav-list">
+            <li><a href="jeevdarshini.html">Live Streaming Feeds</a></li>
+            <li><a href="research.html">Scholar Registration</a></li>
+            <li><a href="events.html">Media Gallery</a></li>
+          </ul>
+        </div>
+
+        <!-- Col 4: Contact Desk -->
+        <div>
+          <h4 class="footer-col-title">Contact Desk</h4>
+          <div class="footer-contact-text">
+            Administrative Office, Thrissur Zoological Park<br>
+            Puthur, Thrissur District,<br>
+            Kerala State, India - 680014<br>
+            Email: <a href="mailto:thrissurzoologicalpark@gmail.com">thrissurzoologicalpark@gmail.com</a>;<br>
+            <a href="mailto:admin@tzp-cds.com">admin@tzp-cds.com</a>
+          </div>
+        </div>
+
+      </div>
+
+      <div class="footer-bottom-bar">
+        <div>
+          &copy; 2026 Thrissur Zoological Park, Puthur. All Rights Reserved | Official Conservation Portal.
+        </div>
+        <div>
+          Kerala Forest & Wildlife Department • Central Zoo Authority
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Scripts: Lenis Smooth Scroll + GSAP + ScrollTrigger + App Logic -->
+  <script src="https://cdn.jsdelivr.net/npm/@studio-freight/lenis@1.0.42/dist/lenis.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js"></script>
+  <script src="js/main.js"></script>
+</body>
+</html>

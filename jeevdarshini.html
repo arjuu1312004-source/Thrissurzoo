@@ -1,0 +1,339 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Jeevdarshini Live | Thrissur Zoological Park</title>
+  <meta name="description" content="Watch real-time live video streams from 9 open wildlife habitats at Thrissur Zoological Park, Puthur.">
+  <link rel="canonical" href="https://tzp-cds.com/jeevdarshini.html">
+  <link rel="icon" type="image/png" href="assets/images/TZP-LOGO-TRANS.png">
+  <link rel="stylesheet" href="css/theme.css">
+  <style>
+    .monitor-screen-wrapper {
+      position: relative;
+      background: #0c1813;
+      border-radius: var(--radius-lg);
+      border: 1px solid var(--color-border);
+      aspect-ratio: 16 / 9;
+      max-width: 960px;
+      margin: 0 auto 16px auto;
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: var(--shadow-lg);
+    }
+    .monitor-placeholder {
+      text-align: center;
+      color: rgba(255, 255, 255, 0.7);
+      padding: 24px;
+    }
+    .monitor-footer-bar {
+      max-width: 960px;
+      margin: 0 auto 56px auto;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 12px 18px;
+      background: var(--color-ivory);
+      border-radius: var(--radius-md);
+      border: 1px solid var(--color-border);
+    }
+    .live-dot {
+      width: 10px;
+      height: 10px;
+      background: #10B981;
+      border-radius: 50%;
+      display: inline-block;
+      margin-right: 8px;
+      animation: pulse 2s infinite;
+    }
+    @keyframes pulse {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.4; }
+    }
+    .cams-grid-9 {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+    }
+    @media (max-width: 900px) {
+      .cams-grid-9 { grid-template-columns: repeat(2, 1fr); }
+    }
+    @media (max-width: 600px) {
+      .cams-grid-9 { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Floating Frosted Pill Nav -->
+  <div class="nav-wrapper">
+    <nav class="nav-pill">
+      <a href="index.html" class="nav-logo-group">
+        <img src="assets/images/TZP-LOGO-TRANS.png" alt="Logo">
+        <div>
+          <span class="nav-logo-text">Thrissur Zoo</span>
+          <span class="nav-logo-sub">Puthur Sanctuary</span>
+        </div>
+      </a>
+
+      <ul class="nav-menu">
+        <li><a href="index.html" class="nav-link">About Us</a></li>
+        <li><a href="visit-us.html" class="nav-link">Visit Us</a></li>
+        <li><a href="virtual-tour.html" class="nav-link">Virtual Tour</a></li>
+        <li><a href="events.html" class="nav-link">Events</a></li>
+        <li><a href="research.html" class="nav-link">Research Centre</a></li>
+      </ul>
+
+      <div style="display: flex; align-items: center; gap: 12px;">
+        <a href="https://tzp-cds.com/book/" class="nav-cta-btn" target="_blank" rel="noopener noreferrer">
+          <span>Book Tickets</span>
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="7" y1="17" x2="17" y2="7"></line><polyline points="7 7 17 7 17 17"></polyline></svg>
+        </a>
+        <button class="mobile-menu-btn" id="mobileNavToggle" aria-label="Toggle Navigation">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg>
+        </button>
+      </div>
+    </nav>
+  </div>
+
+  <!-- Mobile Drawer -->
+  <div class="mobile-nav-drawer" id="mobileNavDrawer">
+    <div>
+      <div style="display: flex; justify-content: space-between; align-items: center;">
+        <div class="nav-logo-group">
+          <img src="assets/images/TZP-LOGO-TRANS.png" alt="Logo">
+          <span class="nav-logo-text">Thrissur Zoo</span>
+        </div>
+        <button id="closeMobileNav" style="background: none; border: none; font-size: 28px; cursor: pointer; color: var(--color-green);">&times;</button>
+      </div>
+      <ul class="mobile-nav-links">
+        <li><a href="index.html" class="mobile-nav-link">About Us</a></li>
+        <li><a href="visit-us.html" class="mobile-nav-link">Visit Us</a></li>
+        <li><a href="virtual-tour.html" class="mobile-nav-link">Virtual Tour</a></li>
+        <li><a href="events.html" class="mobile-nav-link">Events</a></li>
+        <li><a href="research.html" class="mobile-nav-link">Research Centre</a></li>
+      </ul>
+    </div>
+    <div>
+      <a href="https://tzp-cds.com/book/" class="btn-primary" style="width: 100%; text-align: center; margin-bottom: 16px;" target="_blank">Book Online Passes ↗</a>
+    </div>
+  </div>
+
+  <!-- Goodwish Style Title Banner -->
+  <header class="inner-hero-banner">
+    <img src="assets/images/banner8.jpg" alt="Jeevdarshini Surveillance Network" class="inner-hero-bg">
+    <div class="inner-hero-content">
+      <span class="overline-label" style="color: var(--color-gold-light);">Real-Time Bio-Feeds</span>
+      <h1 class="inner-hero-title">Jeevdarshini Live Surveillance Network</h1>
+      <div class="gold-rule gold-rule-center"></div>
+    </div>
+  </header>
+
+  <!-- Main Content -->
+  <main class="section-spacing section-white">
+    <div class="container">
+      
+      <!-- Live Stream Monitor Terminal -->
+      <div class="monitor-screen-wrapper" id="monitorBox">
+        <div class="monitor-placeholder" id="videoPlaceholder">
+          <svg width="44" height="44" viewBox="0 0 24 24" fill="none" stroke="var(--color-gold)" stroke-width="1.8" style="margin: 0 auto 12px auto; display: block;">
+            <rect x="2" y="7" width="20" height="15" rx="2" ry="2"></rect>
+            <polyline points="17 2 12 7 7 2"></polyline>
+          </svg>
+          <h4 style="font-family: var(--font-serif); font-size: 1.3rem; color: #FFFFFF; margin-bottom: 6px;">Select a habitat camera field below</h4>
+          <p style="font-size: 0.88rem; color: rgba(255, 255, 255, 0.7);">Stream real-time operational feeds directly into this terminal grid frame.</p>
+        </div>
+        <img id="terminalFeedImage" src="" alt="Enclosure Live Feed" style="display: none; width: 100%; height: 100%; object-fit: cover;">
+      </div>
+
+      <div class="monitor-footer-bar">
+        <div style="display: flex; align-items: center;">
+          <div class="live-dot"></div>
+          <span id="activeCamLabel" style="font-weight: 600; color: var(--color-green);">System Standby Mode</span>
+        </div>
+        <div style="font-size: 0.82rem; color: var(--color-secondary);" id="activeUrlLabel">Protocol Source: Unassigned</div>
+      </div>
+
+      <!-- 9 Channels Grid from tzp-cds.com -->
+      <div style="margin-bottom: 32px;">
+        <span class="overline-label">Channel Matrix</span>
+        <h2 class="serif-heading" style="font-size: 2rem; margin-bottom: 8px;">Available Enclosure Camera Grids (9 Channels)</h2>
+        <div class="gold-rule"></div>
+      </div>
+
+      <div class="cams-grid-9">
+        
+        <!-- Cam 1 -->
+        <div class="pillar-card">
+          <div class="pillar-img-wrapper" style="height: 180px;">
+            <img src="assets/images/banner8.jpg" alt="Tiger Enclosure">
+          </div>
+          <div class="pillar-card-body">
+            <h3 class="pillar-title" style="font-size: 1.15rem;">Tiger Enclosure [Cam 01]</h3>
+            <button class="btn-primary stream-switch-btn" data-cam="Tiger Enclosure [Cam 01]" data-img="assets/images/banner8.jpg" style="width: 100%; margin-top: 10px;">Launch Live Stream</button>
+          </div>
+        </div>
+
+        <!-- Cam 2 -->
+        <div class="pillar-card">
+          <div class="pillar-img-wrapper" style="height: 180px;">
+            <img src="assets/images/banner2.jpg" alt="Asiatic Lion Canopy">
+          </div>
+          <div class="pillar-card-body">
+            <h3 class="pillar-title" style="font-size: 1.15rem;">Asiatic Lion Canopy [Cam 02]</h3>
+            <button class="btn-primary stream-switch-btn" data-cam="Asiatic Lion Canopy [Cam 02]" data-img="assets/images/banner2.jpg" style="width: 100%; margin-top: 10px;">Launch Live Stream</button>
+          </div>
+        </div>
+
+        <!-- Cam 3 -->
+        <div class="pillar-card">
+          <div class="pillar-img-wrapper" style="height: 180px;">
+            <img src="assets/images/banner10.jpg" alt="Hippopotamus Arena">
+          </div>
+          <div class="pillar-card-body">
+            <h3 class="pillar-title" style="font-size: 1.15rem;">Hippopotamus Arena [Cam 03]</h3>
+            <button class="btn-primary stream-switch-btn" data-cam="Hippopotamus Arena [Cam 03]" data-img="assets/images/banner10.jpg" style="width: 100%; margin-top: 10px;">Launch Live Stream</button>
+          </div>
+        </div>
+
+        <!-- Cam 4 -->
+        <div class="pillar-card">
+          <div class="pillar-img-wrapper" style="height: 180px;">
+            <img src="assets/images/banner6.jpg" alt="Leopard Lair Outcrop">
+          </div>
+          <div class="pillar-card-body">
+            <h3 class="pillar-title" style="font-size: 1.15rem;">Leopard Lair Outcrop [Cam 04]</h3>
+            <button class="btn-primary stream-switch-btn" data-cam="Leopard Lair Outcrop [Cam 04]" data-img="assets/images/banner6.jpg" style="width: 100%; margin-top: 10px;">Launch Live Stream</button>
+          </div>
+        </div>
+
+        <!-- Cam 5 -->
+        <div class="pillar-card">
+          <div class="pillar-img-wrapper" style="height: 180px;">
+            <img src="assets/images/banner3.jpg" alt="Exotic Aviary Sanctuary">
+          </div>
+          <div class="pillar-card-body">
+            <h3 class="pillar-title" style="font-size: 1.15rem;">Exotic Aviary Sanctuary [Cam 05]</h3>
+            <button class="btn-primary stream-switch-btn" data-cam="Exotic Aviary Sanctuary [Cam 05]" data-img="assets/images/banner3.jpg" style="width: 100%; margin-top: 10px;">Launch Live Stream</button>
+          </div>
+        </div>
+
+        <!-- Cam 6 -->
+        <div class="pillar-card">
+          <div class="pillar-img-wrapper" style="height: 180px;">
+            <img src="assets/images/banner4.jpg" alt="Spotted Deer Park">
+          </div>
+          <div class="pillar-card-body">
+            <h3 class="pillar-title" style="font-size: 1.15rem;">Spotted Deer Park [Cam 06]</h3>
+            <button class="btn-primary stream-switch-btn" data-cam="Spotted Deer Park [Cam 06]" data-img="assets/images/banner4.jpg" style="width: 100%; margin-top: 10px;">Launch Live Stream</button>
+          </div>
+        </div>
+
+        <!-- Cam 7 -->
+        <div class="pillar-card">
+          <div class="pillar-img-wrapper" style="height: 180px;">
+            <img src="assets/images/banner9.jpg" alt="Crocodile Swampland">
+          </div>
+          <div class="pillar-card-body">
+            <h3 class="pillar-title" style="font-size: 1.15rem;">Crocodile Swampland [Cam 07]</h3>
+            <button class="btn-primary stream-switch-btn" data-cam="Crocodile Swampland [Cam 07]" data-img="assets/images/banner9.jpg" style="width: 100%; margin-top: 10px;">Launch Live Stream</button>
+          </div>
+        </div>
+
+        <!-- Cam 8 -->
+        <div class="pillar-card">
+          <div class="pillar-img-wrapper" style="height: 180px;">
+            <img src="assets/images/banner5.jpg" alt="Wild Jackal Den">
+          </div>
+          <div class="pillar-card-body">
+            <h3 class="pillar-title" style="font-size: 1.15rem;">Wild Jackal Den [Cam 08]</h3>
+            <button class="btn-primary stream-switch-btn" data-cam="Wild Jackal Den [Cam 08]" data-img="assets/images/banner5.jpg" style="width: 100%; margin-top: 10px;">Launch Live Stream</button>
+          </div>
+        </div>
+
+        <!-- Cam 9 -->
+        <div class="pillar-card">
+          <div class="pillar-img-wrapper" style="height: 180px;">
+            <img src="assets/images/banner1.jpg" alt="Indian Gaur Yard">
+          </div>
+          <div class="pillar-card-body">
+            <h3 class="pillar-title" style="font-size: 1.15rem;">Indian Gaur (Bison) Yard [Cam 09]</h3>
+            <button class="btn-primary stream-switch-btn" data-cam="Indian Gaur (Bison) Yard [Cam 09]" data-img="assets/images/banner1.jpg" style="width: 100%; margin-top: 10px;">Launch Live Stream</button>
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+  </main>
+
+  <!-- Footer -->
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-top-grid">
+        <div class="footer-brand">
+          <h3>Thrissur Zoological Park</h3>
+          <div class="gold-rule" style="margin: 10px 0 16px 0;"></div>
+          <p>India's first designer zoo spread over 336 acres in Puthur, Thrissur. Dedicated to barrier-free biomes, wildlife research, and eco-conservation.</p>
+        </div>
+        <div>
+          <h4 class="footer-col-title">Quick Access</h4>
+          <ul class="footer-nav-list">
+            <li><a href="index.html">About Facility</a></li>
+            <li><a href="https://tzp-cds.com/book/" target="_blank" rel="noopener noreferrer">Online Ticketing</a></li>
+            <li><a href="visit-us.html">Directions & Parking</a></li>
+          </ul>
+        </div>
+        <div>
+          <h4 class="footer-col-title">Citizen Portals</h4>
+          <ul class="footer-nav-list">
+            <li><a href="jeevdarshini.html">Live Streaming Feeds</a></li>
+            <li><a href="research.html">Scholar Registration</a></li>
+            <li><a href="events.html">Media Gallery</a></li>
+          </ul>
+        </div>
+        <div>
+          <h4 class="footer-col-title">Contact Desk</h4>
+          <div class="footer-contact-text">
+            Administrative Office, Thrissur Zoological Park<br>
+            Puthur, Thrissur District,<br>
+            Kerala State, India - 680014<br>
+            Email: <a href="mailto:thrissurzoologicalpark@gmail.com">thrissurzoologicalpark@gmail.com</a>;<br>
+            <a href="mailto:admin@tzp-cds.com">admin@tzp-cds.com</a>
+          </div>
+        </div>
+      </div>
+      <div class="footer-bottom-bar">
+        <div>&copy; 2026 Thrissur Zoological Park, Puthur. All Rights Reserved | Official Conservation Portal.</div>
+        <div>Kerala Forest & Wildlife Department • Central Zoo Authority</div>
+      </div>
+    </div>
+  </footer>
+
+  <script src="js/main.js"></script>
+  <script>
+    document.querySelectorAll('.stream-switch-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const cam = btn.getAttribute('data-cam');
+        const img = btn.getAttribute('data-img');
+        const placeholder = document.getElementById('videoPlaceholder');
+        const feedImg = document.getElementById('terminalFeedImage');
+        const label = document.getElementById('activeCamLabel');
+        const urlLabel = document.getElementById('activeUrlLabel');
+        
+        if (placeholder) placeholder.style.display = 'none';
+        if (feedImg) {
+          feedImg.style.display = 'block';
+          feedImg.src = img;
+        }
+        if (label) label.textContent = 'LIVE: ' + cam;
+        if (urlLabel) urlLabel.textContent = 'Protocol Source: Secure Enclosure Stream Active';
+        
+        document.getElementById('monitorBox').scrollIntoView({ behavior: 'smooth' });
+      });
+    });
+  </script>
+</body>
+</html>
