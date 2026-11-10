@@ -101,8 +101,9 @@ function initWatchHeroScrubber() {
 
   function resizeCanvas() {
     const dpr = Math.min(window.devicePixelRatio || 1, 2);
-    const w = window.innerWidth;
-    const h = window.innerHeight;
+    const viewport = document.querySelector('.watch-pinned-viewport');
+    const w = viewport ? viewport.clientWidth : window.innerWidth;
+    const h = viewport ? viewport.clientHeight : window.innerHeight;
 
     canvas.width = Math.round(w * dpr);
     canvas.height = Math.round(h * dpr);
@@ -124,34 +125,21 @@ function initWatchHeroScrubber() {
     if (lastRenderedIndex === bestIdx) return;
     lastRenderedIndex = bestIdx;
 
-    const w = window.innerWidth;
-    const h = window.innerHeight;
+    const viewport = document.querySelector('.watch-pinned-viewport');
+    const w = viewport ? viewport.clientWidth : window.innerWidth;
+    const h = viewport ? viewport.clientHeight : window.innerHeight;
     const imgW = img.naturalWidth || 1920;
     const imgH = img.naturalHeight || 1080;
 
-    let renderW, renderH, offsetX, offsetY;
+    // Full-bleed cover across ALL viewports (mobile, tablet, desktop)
+    // Ensures the frame FULLY covers the hero page edge-to-edge and top-to-bottom with ZERO black bars!
+    const scale = Math.max(w / imgW, h / imgH);
+    const renderW = imgW * scale;
+    const renderH = imgH * scale;
+    const offsetX = (w - renderW) / 2;
+    const offsetY = (h - renderH) / 2;
 
-    if (w < h) {
-      // Mobile / Tablet Portrait:
-      // Fit to screen width with 1.04x scale so 96%+ of exploded gears are completely visible
-      // across screen width and perfectly centered vertically
-      const scale = (w / imgW) * 1.04;
-      renderW = imgW * scale;
-      renderH = imgH * scale;
-      offsetX = (w - renderW) / 2;
-      offsetY = (h - renderH) / 2;
-    } else {
-      // Desktop / Landscape:
-      // Full bleed cover
-      const scale = Math.max(w / imgW, h / imgH);
-      renderW = imgW * scale;
-      renderH = imgH * scale;
-      offsetX = (w - renderW) / 2;
-      offsetY = (h - renderH) / 2;
-    }
-
-    ctx.fillStyle = '#060E0A';
-    ctx.fillRect(0, 0, w, h);
+    ctx.clearRect(0, 0, w, h);
     ctx.drawImage(img, offsetX, offsetY, renderW, renderH);
   }
 

@@ -465,7 +465,7 @@ a {
   inset: 0;
   width: 100%;
   height: 100%;
-  object-fit: contain;
+  object-fit: cover;
   z-index: 3;
 }
 
@@ -475,8 +475,8 @@ a {
   bottom: 0;
   left: 0;
   width: 100%;
-  height: 22%;
-  background: linear-gradient(to bottom, rgba(6, 14, 10, 0) 0%, rgba(6, 14, 10, 0.55) 45%, rgba(255, 255, 255, 0.95) 90%, #FFFFFF 100%);
+  height: 18%;
+  background: linear-gradient(to bottom, transparent 0%, rgba(255, 255, 255, 0.45) 65%, #FFFFFF 100%);
   z-index: 8;
   pointer-events: none;
 }
