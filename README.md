@@ -20,11 +20,15 @@ A luxury eco-resort & museum inspired recreation of the official website for **T
   - White cards with `1px solid rgba(20, 52, 42, 0.08)` borders, soft multi-layer box shadows, and 20–24px rounded corners.
   - Signature architectural arches (`border-radius: 140px 140px 20px 20px`).
 - **Hero Experience**:
-  - Full-screen, scroll-driven watch deconstruction & exploded gear animation on `<canvas id="watchCanvas">`, utilizing the 75 high-definition product sequence frames in `assets/frame/` (`ezgif-frame-001.jpg` – `ezgif-frame-075.jpg`).
+  - Full-screen, scroll-driven watch deconstruction & exploded gear animation on `<canvas id="watchCanvas">`, utilizing all 299 Full HD (1920x1080) sequence frames in `assets/frame1/` (`ezgif-frame-001.jpg` – `ezgif-frame-299.jpg`).
   - Studio luxury lighting spills: primary emerald depth spill, champagne gold specular flare, and an ambient vignette.
-  - Pure visual canvas presentation with zero text overlays, cards, or boxes covering the watch as it reveals its gears and explodes across the screen.
-  - Fast progressive preloader with a hairline gold progress bar.
-  - Smooth Lenis scroll interpolation releasing seamlessly into the Quick-Link tiles and subsequent sections.
+  - Scroll-reactive feature overlays in pure, cardless editorial typography (no box containers, cards, or borders obscuring the mechanical gears):
+    1. *Assembled*: Master edition chronograph headline with specifications line.
+    2. *Optical Architecture*: Anti-reflective sapphire crystal and diamond-cut fluted bezel decoupling.
+    3. *Core Calibre*: Highly exploded gear train revealing all 312 micro-engineered parts and the 28,800 VPH (4Hz) silicon escapement.
+    4. *Mastery*: Structural climax statement leading seamlessly into the subsequent sections.
+  - Fast progressive preloader prioritizing instant display of initial frames while caching the sequence in the background.
+  - Smooth Lenis scroll interpolation across 480vh releasing seamlessly into the Quick-Link tiles and subsequent sections.
 
 ---
 
