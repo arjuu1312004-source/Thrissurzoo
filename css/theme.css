@@ -351,16 +351,16 @@ a {
 .watch-hero-container {
   position: relative;
   width: 100%;
-  height: 200vh;
+  height: 100vh;
+  height: 100dvh;
+  overflow: hidden;
   background-color: #060e0a;
 }
 
 .watch-pinned-viewport {
-  position: sticky;
-  top: 0;
+  position: relative;
   width: 100%;
-  height: 100vh;
-  height: 100dvh;
+  height: 100%;
   overflow: hidden;
   display: flex;
   align-items: center;
@@ -607,9 +607,6 @@ a {
 }
 
 @media (max-width: 900px) {
-  .watch-hero-container {
-    height: 130vh;
-  }
   .watch-bottom-fade {
     height: 14%;
   }

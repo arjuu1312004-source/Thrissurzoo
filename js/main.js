@@ -206,19 +206,22 @@ function initWatchHeroScrubber() {
     }
   }, 1200);
 
-  // ScrollTrigger Setup: Pin and scrub with ultra-responsive 1:1 touch on mobile
+  // ScrollTrigger Setup: Pin and scrub with balanced, natural pace
   if (typeof gsap !== 'undefined' && typeof ScrollTrigger !== 'undefined') {
     gsap.registerPlugin(ScrollTrigger);
 
     const isMobile = window.innerWidth < 768;
+    // Balanced, natural scrub duration: 2.8x screen height on mobile, 3.4x on desktop
+    // This gives the 299 frames a calm, smooth video pace (not frantic or fast)
+    const scrollDistanceMultiplier = isMobile ? 2.8 : 3.4;
 
     ScrollTrigger.create({
       trigger: container,
       start: 'top top',
-      end: 'bottom bottom',
-      pin: '.watch-pinned-viewport',
-      pinSpacing: false,
-      scrub: isMobile ? true : 0.05, // Instant 1:1 scrub on mobile touch, buttery 0.05 on desktop
+      end: () => `+=${Math.round(window.innerHeight * scrollDistanceMultiplier)}`,
+      pin: true,
+      pinSpacing: true,
+      scrub: isMobile ? 0.12 : 0.2, // Silky cinematic scrub follow-through
       anticipatePin: 1,
       fastScrollEnd: true,
       onUpdate: (self) => {
@@ -239,6 +242,16 @@ function initWatchHeroScrubber() {
         if (spillGold) {
           const goldOpacity = 0.35 + progress * 0.6;
           spillGold.style.opacity = String(goldOpacity);
+        }
+
+        // Seamless transition near the very end:
+        // As scroll approaches 100%, gently fade canvas into the ivory section background
+        // so it seamlessly releases directly into the Quick-Link tiles and subsequent sections
+        if (progress > 0.88) {
+          const fadeProgress = (progress - 0.88) / 0.12;
+          canvas.style.opacity = String(1 - fadeProgress * 0.35);
+        } else {
+          canvas.style.opacity = '1';
         }
       }
     });
