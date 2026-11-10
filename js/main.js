@@ -54,13 +54,6 @@ function initWatchHeroScrubber() {
   const progressBar = document.getElementById('watchProgressBar');
   const spillPrimary = document.getElementById('watchSpillPrimary');
   const spillGold = document.getElementById('watchSpillGold');
-  const stages = [
-    document.getElementById('watchStage1'),
-    document.getElementById('watchStage2'),
-    document.getElementById('watchStage3'),
-    document.getElementById('watchStage4')
-  ];
-  const scrollIndicator = document.getElementById('watchScrollIndicator');
 
   if (!canvas || !container) return;
 
@@ -161,28 +154,6 @@ function initWatchHeroScrubber() {
           requestAnimationFrame(() => render(targetFrame));
         }
 
-        // Determine active text milestone
-        let activeIdx = 0;
-        if (progress < 0.22) {
-          activeIdx = 0; // Stage 1: Assembled Timepiece
-        } else if (progress < 0.48) {
-          activeIdx = 1; // Stage 2: Optical & Bezel Deconstruction
-        } else if (progress < 0.74) {
-          activeIdx = 2; // Stage 3: Highly Exploded Kinetic Calibre
-        } else {
-          activeIdx = 3; // Stage 4: Structural Climax
-        }
-
-        stages.forEach((stage, i) => {
-          if (stage) {
-            if (i === activeIdx) {
-              stage.classList.add('active');
-            } else {
-              stage.classList.remove('active');
-            }
-          }
-        });
-
         // Dynamic studio lighting spills
         if (spillPrimary) {
           const spillScale = 1 + progress * 0.5;
@@ -191,11 +162,6 @@ function initWatchHeroScrubber() {
         if (spillGold) {
           const goldOpacity = 0.35 + progress * 0.6;
           spillGold.style.opacity = String(goldOpacity);
-        }
-
-        // Scroll prompt
-        if (scrollIndicator) {
-          scrollIndicator.style.opacity = progress > 0.05 ? '0' : '0.85';
         }
       }
     });
