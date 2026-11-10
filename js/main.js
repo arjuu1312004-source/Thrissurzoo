@@ -22,14 +22,16 @@ let lenisInstance = null;
 
 function initSmoothScroll() {
   if (typeof Lenis !== 'undefined') {
+    const isMobile = window.innerWidth < 768;
     lenisInstance = new Lenis({
-      duration: 1.2,
+      duration: isMobile ? 0.7 : 0.9,
       easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
       orientation: 'vertical',
       gestureOrientation: 'vertical',
       smoothWheel: true,
-      wheelMultiplier: 1,
-      touchMultiplier: 1.5,
+      wheelMultiplier: 1.15,
+      touchMultiplier: 1.8,
+      syncTouch: true,
     });
 
     if (typeof ScrollTrigger !== 'undefined') {
@@ -45,7 +47,7 @@ function initSmoothScroll() {
 }
 
 /* ==============================================================================
-   2. SCROLL-DRIVEN WATCH EXPLODED HERO (Product Experience)
+   2. SCROLL-DRIVEN WATCH EXPLODED HERO (Responsive & Fast Scrub)
    ============================================================================== */
 function initWatchHeroScrubber() {
   const canvas = document.getElementById('watchCanvas');
@@ -59,7 +61,7 @@ function initWatchHeroScrubber() {
 
   const ctx = canvas.getContext('2d');
   const frameCount = 299;
-  const images = [];
+  const images = new Array(frameCount);
   let loadedCount = 0;
   let currentFrameIndex = 1;
   let lastRenderedIndex = -1;
@@ -69,81 +71,168 @@ function initWatchHeroScrubber() {
     return `assets/frame1/ezgif-frame-${pad}.jpg`;
   }
 
+  // Find closest loaded frame to guarantee instant rendering with zero frozen gaps
+  function getBestLoadedImage(targetIdx) {
+    const idx = Math.max(1, Math.min(targetIdx, frameCount));
+    // 1. Direct hit
+    const exact = images[idx - 1];
+    if (exact && exact.complete && exact.naturalWidth > 0) {
+      return { img: exact, index: idx };
+    }
+    // 2. Search outwards for closest cached frame
+    for (let dist = 1; dist < frameCount; dist++) {
+      const prev = idx - dist;
+      if (prev >= 1) {
+        const prevImg = images[prev - 1];
+        if (prevImg && prevImg.complete && prevImg.naturalWidth > 0) {
+          return { img: prevImg, index: prev };
+        }
+      }
+      const next = idx + dist;
+      if (next <= frameCount) {
+        const nextImg = images[next - 1];
+        if (nextImg && nextImg.complete && nextImg.naturalWidth > 0) {
+          return { img: nextImg, index: next };
+        }
+      }
+    }
+    return null;
+  }
+
   function resizeCanvas() {
     const dpr = Math.min(window.devicePixelRatio || 1, 2);
-    canvas.width = window.innerWidth * dpr;
-    canvas.height = window.innerHeight * dpr;
-    canvas.style.width = `${window.innerWidth}px`;
-    canvas.style.height = `${window.innerHeight}px`;
-    ctx.scale(dpr, dpr);
+    const w = window.innerWidth;
+    const h = window.innerHeight;
+
+    canvas.width = Math.round(w * dpr);
+    canvas.height = Math.round(h * dpr);
+    canvas.style.width = `${w}px`;
+    canvas.style.height = `${h}px`;
+
+    ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+    lastRenderedIndex = -1;
     render(currentFrameIndex);
   }
 
   function render(index) {
-    const idx = Math.max(1, Math.min(index, frameCount));
-    const img = images[idx - 1];
+    const best = getBestLoadedImage(index);
+    if (!best) return;
 
-    if (!img || !img.complete || img.naturalWidth === 0) return;
-    if (lastRenderedIndex === idx) return;
+    const img = best.img;
+    const bestIdx = best.index;
 
-    lastRenderedIndex = idx;
+    if (lastRenderedIndex === bestIdx) return;
+    lastRenderedIndex = bestIdx;
 
     const w = window.innerWidth;
     const h = window.innerHeight;
     const imgW = img.naturalWidth || 1920;
     const imgH = img.naturalHeight || 1080;
 
-    // Cover logic with centered positioning so exploded watch parts fill the display majestically
-    const scale = Math.max(w / imgW, h / imgH);
-    const renderW = imgW * scale;
-    const renderH = imgH * scale;
-    const offsetX = (w - renderW) / 2;
-    const offsetY = (h - renderH) / 2;
+    let renderW, renderH, offsetX, offsetY;
 
-    ctx.clearRect(0, 0, w, h);
+    if (w < h) {
+      // Mobile / Tablet Portrait:
+      // Fit to screen width with 1.04x scale so 96%+ of exploded gears are completely visible
+      // across screen width and perfectly centered vertically
+      const scale = (w / imgW) * 1.04;
+      renderW = imgW * scale;
+      renderH = imgH * scale;
+      offsetX = (w - renderW) / 2;
+      offsetY = (h - renderH) / 2;
+    } else {
+      // Desktop / Landscape:
+      // Full bleed cover
+      const scale = Math.max(w / imgW, h / imgH);
+      renderW = imgW * scale;
+      renderH = imgH * scale;
+      offsetX = (w - renderW) / 2;
+      offsetY = (h - renderH) / 2;
+    }
+
+    ctx.fillStyle = '#060E0A';
+    ctx.fillRect(0, 0, w, h);
     ctx.drawImage(img, offsetX, offsetY, renderW, renderH);
   }
 
-  // Preload frames progressively (first 25 frames prioritize initial viewport reveal)
-  for (let i = 1; i <= frameCount; i++) {
+  function loadSingleFrame(i, onComplete) {
+    if (images[i - 1]) return;
     const img = new Image();
     img.src = getFrameSrc(i);
     img.onload = () => {
       loadedCount++;
-      if (progressBar && loadedCount <= 30) {
-        const percent = Math.min(100, Math.round((loadedCount / 25) * 100));
+      if (progressBar && loadedCount <= 25) {
+        const percent = Math.min(100, Math.round((loadedCount / 20) * 100));
         progressBar.style.width = `${percent}%`;
       }
       if (loadedCount === 1) {
         resizeCanvas();
         render(1);
       }
-      if (loadedCount >= 20 && loader) {
+      if (loadedCount >= 12 && loader) {
         loader.classList.add('hidden');
       }
+      if (onComplete) onComplete();
     };
-    images.push(img);
+    img.onerror = () => {
+      if (onComplete) onComplete();
+    };
+    images[i - 1] = img;
   }
 
-  window.addEventListener('resize', resizeCanvas);
+  // Wave 1: Rapid keyframe stride (every 4th frame + first 10 frames)
+  // Provides 100% full scrub coverage from 0% to 100% in under 1.5 seconds!
+  const wave1Frames = [];
+  for (let i = 1; i <= 10; i++) wave1Frames.push(i);
+  for (let i = 12; i <= frameCount; i += 4) wave1Frames.push(i);
+  if (!wave1Frames.includes(frameCount)) wave1Frames.push(frameCount);
+
+  wave1Frames.forEach(idx => loadSingleFrame(idx));
+
+  // Wave 2: Interleaved in-between frames loaded progressively in background
+  setTimeout(() => {
+    for (let i = 1; i <= frameCount; i++) {
+      if (!images[i - 1]) {
+        loadSingleFrame(i);
+      }
+    }
+  }, 250);
+
+  // Smart resize listener (ignores mobile vertical address bar show/hide jitters)
+  let prevW = window.innerWidth;
+  window.addEventListener('resize', () => {
+    if (Math.abs(window.innerWidth - prevW) > 8) {
+      prevW = window.innerWidth;
+      resizeCanvas();
+    } else {
+      render(currentFrameIndex);
+    }
+  });
+
   resizeCanvas();
 
-  // Safety fallback: reveal viewport after 1.8s
+  // Safety fallback: reveal viewport after 1.2s max
   setTimeout(() => {
     if (loader && !loader.classList.contains('hidden')) {
       loader.classList.add('hidden');
     }
-  }, 1800);
+  }, 1200);
 
-  // ScrollTrigger Setup
+  // ScrollTrigger Setup: Pin and scrub with ultra-responsive 1:1 touch on mobile
   if (typeof gsap !== 'undefined' && typeof ScrollTrigger !== 'undefined') {
     gsap.registerPlugin(ScrollTrigger);
+
+    const isMobile = window.innerWidth < 768;
 
     ScrollTrigger.create({
       trigger: container,
       start: 'top top',
       end: 'bottom bottom',
-      scrub: 0.35,
+      pin: '.watch-pinned-viewport',
+      pinSpacing: false,
+      scrub: isMobile ? true : 0.05, // Instant 1:1 scrub on mobile touch, buttery 0.05 on desktop
+      anticipatePin: 1,
+      fastScrollEnd: true,
       onUpdate: (self) => {
         const progress = self.progress;
 
@@ -156,7 +245,7 @@ function initWatchHeroScrubber() {
 
         // Dynamic studio lighting spills
         if (spillPrimary) {
-          const spillScale = 1 + progress * 0.5;
+          const spillScale = 1 + progress * 0.45;
           spillPrimary.style.transform = `translate(-50%, -50%) scale(${spillScale})`;
         }
         if (spillGold) {
