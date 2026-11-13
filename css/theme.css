@@ -467,13 +467,6 @@ a {
   }
 }
 
-@keyframes scrollDrop {
-  0% { transform: scaleY(0); transform-origin: top; }
-  50% { transform: scaleY(1); transform-origin: top; }
-  50.1% { transform: scaleY(1); transform-origin: bottom; }
-  100% { transform: scaleY(0); transform-origin: bottom; }
-}
-
 /* Vertical Dot Navigation (Goodwish style) */
 .vertical-dot-nav {
   position: fixed;
@@ -482,16 +475,16 @@ a {
   transform: translateY(-50%);
   display: flex;
   flex-direction: column;
-  gap: 14px;
-  z-index: 100;
+  gap: 12px;
+  z-index: 90;
 }
 
 .dot-nav-item {
   width: 8px;
   height: 8px;
   border-radius: 50%;
-  background-color: var(--color-border);
-  transition: var(--transition-smooth);
+  background-color: rgba(20, 52, 42, 0.25);
+  transition: var(--transition-fast);
   cursor: pointer;
   border: none;
 }
