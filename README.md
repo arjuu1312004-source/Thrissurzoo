@@ -20,11 +20,11 @@ A luxury eco-resort & museum inspired recreation of the official website for **T
   - White cards with `1px solid rgba(20, 52, 42, 0.08)` borders, soft multi-layer box shadows, and 20–24px rounded corners.
   - Signature architectural arches (`border-radius: 140px 140px 20px 20px`).
 - **Hero Experience**:
-  - Full-screen, scroll-driven watch deconstruction & exploded gear animation on `<canvas id="watchCanvas">`, utilizing all 299 Full HD (1920x1080) sequence frames in `assets/frame1/` (`ezgif-frame-001.jpg` – `ezgif-frame-299.jpg`).
-  - Studio luxury lighting spills: primary emerald depth spill, champagne gold specular flare, and an ambient vignette.
-  - Pure visual cinematic display: all obstructive typography, overlay cards, and stage badges removed to keep the focus 100% on the mechanical deconstruction and exploded gears.
-  - Fast progressive preloader prioritizing instant display of initial frames while caching the sequence in the background.
-  - Smooth Lenis scroll interpolation across 480vh releasing seamlessly into the Quick-Link tiles and subsequent sections.
+  - Full-screen, cinematic autoplay video hero (`assets/video/tzp-hero-video.mp4`), featuring drone footage of the sanctuary hills and canopy.
+  - Studio luxury lighting spills: emerald depth spill, champagne gold specular flare, and an ambient vignette.
+  - Full-bleed edge-to-edge video coverage across mobile, tablet, and desktop with zero letterboxing.
+  - Floating frosted pill navigation and subtle audio toggle control.
+  - Smooth Lenis scroll interpolation releasing seamlessly into the Quick-Link tiles and subsequent sections without scroll-jacking.
 
 ---
 

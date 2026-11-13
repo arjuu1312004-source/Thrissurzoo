@@ -5,7 +5,7 @@
 
 document.addEventListener('DOMContentLoaded', () => {
   initSmoothScroll();
-  initWatchHeroScrubber();
+  initHeroVideo();
   initVerticalDotNav();
   initGalleryLightbox();
   initEventsFilter();
@@ -47,213 +47,54 @@ function initSmoothScroll() {
 }
 
 /* ==============================================================================
-   2. SCROLL-DRIVEN WATCH EXPLODED HERO (Responsive & Fast Scrub)
+   2. CINEMATIC VIDEO HERO CONTROLLER
    ============================================================================== */
-function initWatchHeroScrubber() {
-  const canvas = document.getElementById('watchCanvas');
-  const container = document.getElementById('watchHeroContainer');
-  const loader = document.getElementById('watchLoader');
-  const progressBar = document.getElementById('watchProgressBar');
-  const spillPrimary = document.getElementById('watchSpillPrimary');
-  const spillGold = document.getElementById('watchSpillGold');
+function initHeroVideo() {
+  const video = document.getElementById('heroVideo');
+  const muteBtn = document.getElementById('heroMuteToggle');
 
-  if (!canvas || !container) return;
+  if (!video) return;
 
-  const ctx = canvas.getContext('2d');
-  const frameCount = 299;
-  const images = new Array(frameCount);
-  let loadedCount = 0;
-  let currentFrameIndex = 1;
-  let lastRenderedIndex = -1;
-
-  function getFrameSrc(index) {
-    const pad = String(index).padStart(3, '0');
-    return `assets/frame1/ezgif-frame-${pad}.jpg`;
-  }
-
-  // Find closest loaded frame to guarantee instant rendering with zero frozen gaps
-  function getBestLoadedImage(targetIdx) {
-    const idx = Math.max(1, Math.min(targetIdx, frameCount));
-    // 1. Direct hit
-    const exact = images[idx - 1];
-    if (exact && exact.complete && exact.naturalWidth > 0) {
-      return { img: exact, index: idx };
+  // Autoplay handler with fallback for mobile strict policies
+  const startAutoplay = () => {
+    video.muted = true;
+    const promise = video.play();
+    if (promise !== undefined) {
+      promise.catch(() => {
+        // Retry playing once user taps or clicks anywhere on the page
+        const resumeOnInteraction = () => {
+          video.play().catch(() => {});
+          document.removeEventListener('touchstart', resumeOnInteraction);
+          document.removeEventListener('click', resumeOnInteraction);
+        };
+        document.addEventListener('touchstart', resumeOnInteraction, { passive: true, once: true });
+        document.addEventListener('click', resumeOnInteraction, { once: true });
+      });
     }
-    // 2. Search outwards for closest cached frame
-    for (let dist = 1; dist < frameCount; dist++) {
-      const prev = idx - dist;
-      if (prev >= 1) {
-        const prevImg = images[prev - 1];
-        if (prevImg && prevImg.complete && prevImg.naturalWidth > 0) {
-          return { img: prevImg, index: prev };
-        }
-      }
-      const next = idx + dist;
-      if (next <= frameCount) {
-        const nextImg = images[next - 1];
-        if (nextImg && nextImg.complete && nextImg.naturalWidth > 0) {
-          return { img: nextImg, index: next };
-        }
-      }
-    }
-    return null;
-  }
+  };
 
-  function resizeCanvas() {
-    const dpr = Math.min(window.devicePixelRatio || 1, 2);
-    const viewport = document.querySelector('.watch-pinned-viewport');
-    const w = viewport ? viewport.clientWidth : window.innerWidth;
-    const h = viewport ? viewport.clientHeight : window.innerHeight;
+  startAutoplay();
 
-    canvas.width = Math.round(w * dpr);
-    canvas.height = Math.round(h * dpr);
-    canvas.style.width = `${w}px`;
-    canvas.style.height = `${h}px`;
+  // Audio mute/unmute control
+  if (muteBtn) {
+    const soundOnSvg = `
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon>
+        <path d="M19.07 4.93a10 10 0 0 1 0 14.14M15.54 8.46a5 5 0 0 1 0 7.07"></path>
+      </svg>`;
+    const soundOffSvg = `
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon>
+        <line x1="23" y1="9" x2="17" y2="15"></line>
+        <line x1="17" y1="9" x2="23" y2="15"></line>
+      </svg>`;
 
-    ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
-    lastRenderedIndex = -1;
-    render(currentFrameIndex);
-  }
-
-  function render(index) {
-    const best = getBestLoadedImage(index);
-    if (!best) return;
-
-    const img = best.img;
-    const bestIdx = best.index;
-
-    if (lastRenderedIndex === bestIdx) return;
-    lastRenderedIndex = bestIdx;
-
-    const viewport = document.querySelector('.watch-pinned-viewport');
-    const w = viewport ? viewport.clientWidth : window.innerWidth;
-    const h = viewport ? viewport.clientHeight : window.innerHeight;
-    const imgW = img.naturalWidth || 1920;
-    const imgH = img.naturalHeight || 1080;
-
-    // Full-bleed cover across ALL viewports (mobile, tablet, desktop)
-    // Ensures the frame FULLY covers the hero page edge-to-edge and top-to-bottom with ZERO black bars!
-    const scale = Math.max(w / imgW, h / imgH);
-    const renderW = imgW * scale;
-    const renderH = imgH * scale;
-    const offsetX = (w - renderW) / 2;
-    const offsetY = (h - renderH) / 2;
-
-    ctx.clearRect(0, 0, w, h);
-    ctx.drawImage(img, offsetX, offsetY, renderW, renderH);
-  }
-
-  function loadSingleFrame(i, onComplete) {
-    if (images[i - 1]) return;
-    const img = new Image();
-    img.src = getFrameSrc(i);
-    img.onload = () => {
-      loadedCount++;
-      if (progressBar && loadedCount <= 25) {
-        const percent = Math.min(100, Math.round((loadedCount / 20) * 100));
-        progressBar.style.width = `${percent}%`;
-      }
-      if (loadedCount === 1) {
-        resizeCanvas();
-        render(1);
-      }
-      if (loadedCount >= 12 && loader) {
-        loader.classList.add('hidden');
-      }
-      if (onComplete) onComplete();
-    };
-    img.onerror = () => {
-      if (onComplete) onComplete();
-    };
-    images[i - 1] = img;
-  }
-
-  // Wave 1: Rapid keyframe stride (every 4th frame + first 10 frames)
-  // Provides 100% full scrub coverage from 0% to 100% in under 1.5 seconds!
-  const wave1Frames = [];
-  for (let i = 1; i <= 10; i++) wave1Frames.push(i);
-  for (let i = 12; i <= frameCount; i += 4) wave1Frames.push(i);
-  if (!wave1Frames.includes(frameCount)) wave1Frames.push(frameCount);
-
-  wave1Frames.forEach(idx => loadSingleFrame(idx));
-
-  // Wave 2: Interleaved in-between frames loaded progressively in background
-  setTimeout(() => {
-    for (let i = 1; i <= frameCount; i++) {
-      if (!images[i - 1]) {
-        loadSingleFrame(i);
-      }
-    }
-  }, 250);
-
-  // Smart resize listener (ignores mobile vertical address bar show/hide jitters)
-  let prevW = window.innerWidth;
-  window.addEventListener('resize', () => {
-    if (Math.abs(window.innerWidth - prevW) > 8) {
-      prevW = window.innerWidth;
-      resizeCanvas();
-    } else {
-      render(currentFrameIndex);
-    }
-  });
-
-  resizeCanvas();
-
-  // Safety fallback: reveal viewport after 1.2s max
-  setTimeout(() => {
-    if (loader && !loader.classList.contains('hidden')) {
-      loader.classList.add('hidden');
-    }
-  }, 1200);
-
-  // ScrollTrigger Setup: Pin and scrub with balanced, natural pace
-  if (typeof gsap !== 'undefined' && typeof ScrollTrigger !== 'undefined') {
-    gsap.registerPlugin(ScrollTrigger);
-
-    const isMobile = window.innerWidth < 768;
-    // Balanced, natural scrub duration: 2.8x screen height on mobile, 3.4x on desktop
-    // This gives the 299 frames a calm, smooth video pace (not frantic or fast)
-    const scrollDistanceMultiplier = isMobile ? 2.8 : 3.4;
-
-    ScrollTrigger.create({
-      trigger: container,
-      start: 'top top',
-      end: () => `+=${Math.round(window.innerHeight * scrollDistanceMultiplier)}`,
-      pin: true,
-      pinSpacing: true,
-      scrub: isMobile ? 0.12 : 0.2, // Silky cinematic scrub follow-through
-      anticipatePin: 1,
-      fastScrollEnd: true,
-      onUpdate: (self) => {
-        const progress = self.progress;
-
-        // Map scroll progress smoothly across all 299 frames
-        const targetFrame = Math.min(frameCount, Math.max(1, Math.round(progress * (frameCount - 1)) + 1));
-        if (targetFrame !== currentFrameIndex) {
-          currentFrameIndex = targetFrame;
-          requestAnimationFrame(() => render(targetFrame));
-        }
-
-        // Dynamic studio lighting spills
-        if (spillPrimary) {
-          const spillScale = 1 + progress * 0.45;
-          spillPrimary.style.transform = `translate(-50%, -50%) scale(${spillScale})`;
-        }
-        if (spillGold) {
-          const goldOpacity = 0.35 + progress * 0.6;
-          spillGold.style.opacity = String(goldOpacity);
-        }
-
-        // Seamless transition near the very end:
-        // As scroll approaches 100%, gently fade canvas into the ivory section background
-        // so it seamlessly releases directly into the Quick-Link tiles and subsequent sections
-        if (progress > 0.88) {
-          const fadeProgress = (progress - 0.88) / 0.12;
-          canvas.style.opacity = String(1 - fadeProgress * 0.35);
-        } else {
-          canvas.style.opacity = '1';
-        }
-      }
+    muteBtn.addEventListener('click', (e) => {
+      e.stopPropagation();
+      video.muted = !video.muted;
+      muteBtn.innerHTML = video.muted ? soundOffSvg : soundOnSvg;
+      muteBtn.setAttribute('title', video.muted ? 'Unmute Sound' : 'Mute Sound');
+      muteBtn.setAttribute('aria-label', video.muted ? 'Unmute Sound' : 'Mute Sound');
     });
   }
 }
