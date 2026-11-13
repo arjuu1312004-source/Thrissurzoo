@@ -1191,47 +1191,70 @@ a {
 
 .footer-top-grid {
   display: grid;
-  grid-template-columns: 1.5fr 1fr 1fr 1.5fr;
-  gap: 48px;
+  grid-template-columns: 1.4fr 1fr 1fr 1.3fr;
+  gap: 40px;
+  align-items: flex-start;
   padding-bottom: 56px;
   border-bottom: 1px solid rgba(255, 255, 255, 0.12);
 }
 
-.footer-brand h3 {
-  font-family: var(--font-serif);
-  font-size: 1.4rem;
-  color: var(--color-white);
-  margin-bottom: 10px;
+.footer-brand-col {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
 }
 
-.footer-brand p {
-  font-size: 0.88rem;
-  color: rgba(247, 245, 240, 0.7);
-  line-height: 1.6;
+.footer-logo-link {
+  display: inline-block;
+  text-decoration: none;
+  transition: transform 0.3s ease;
 }
 
-.footer-col-title {
+.footer-logo-link:hover {
+  transform: scale(1.02);
+}
+
+.footer-logo {
+  max-width: 240px;
+  width: 100%;
+  height: auto;
+  display: block;
+  filter: drop-shadow(0 4px 14px rgba(0, 0, 0, 0.45));
+}
+
+.footer-heading, .footer-col-title {
   font-family: var(--font-serif);
-  font-size: 1rem;
+  font-size: 1.05rem;
   font-weight: 600;
   color: var(--color-gold-light);
   margin-bottom: 18px;
+  letter-spacing: 0.02em;
 }
 
-.footer-nav-list {
+.footer-links, .footer-nav-list {
   list-style: none;
   display: flex;
   flex-direction: column;
   gap: 10px;
+  margin: 0;
+  padding: 0;
 }
 
-.footer-nav-list a {
+.footer-links li, .footer-nav-list li {
+  font-size: 0.88rem;
+  color: rgba(247, 245, 240, 0.8);
+  line-height: 1.5;
+}
+
+.footer-links a, .footer-nav-list a {
   font-size: 0.88rem;
   color: rgba(247, 245, 240, 0.8);
   transition: var(--transition-smooth);
+  text-decoration: none;
 }
 
-.footer-nav-list a:hover {
+.footer-links a:hover, .footer-nav-list a:hover {
   color: var(--color-white);
   padding-left: 4px;
 }
@@ -1246,13 +1269,30 @@ a {
   color: var(--color-gold-light);
 }
 
-.footer-bottom-bar {
+.footer-bottom-row, .footer-bottom-bar {
   padding-top: 28px;
   display: flex;
   align-items: center;
   justify-content: space-between;
   font-size: 0.8rem;
   color: rgba(247, 245, 240, 0.6);
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+.footer-bottom-links {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.footer-bottom-links a {
+  color: var(--color-gold-light);
+  text-decoration: none;
+}
+
+.footer-bottom-links a:hover {
+  color: var(--color-white);
 }
 
 /* ==============================================================================
@@ -1436,6 +1476,10 @@ a {
   .footer-top-grid {
     grid-template-columns: 1fr;
     gap: 32px;
+  }
+  .footer-logo {
+    max-width: 200px;
+    margin-bottom: 8px;
   }
   .hero-title-main {
     font-size: 2.2rem;
