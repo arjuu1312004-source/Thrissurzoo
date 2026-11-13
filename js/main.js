@@ -6,6 +6,7 @@
 document.addEventListener('DOMContentLoaded', () => {
   initSmoothScroll();
   initHeroVideo();
+  initNavScroll();
   initVerticalDotNav();
   initGalleryLightbox();
   initEventsFilter();
@@ -420,4 +421,27 @@ function initMobileNav() {
 
   if (closeBtn) closeBtn.addEventListener('click', closeDrawer);
   links.forEach(l => l.addEventListener('click', closeDrawer));
+}
+
+/* ==============================================================================
+   9. SCROLL ADAPTIVE HEADER PILL
+   ============================================================================== */
+function initNavScroll() {
+  const navPill = document.querySelector('.nav-pill');
+  if (!navPill) return;
+
+  const updateNav = () => {
+    const y = window.scrollY || window.pageYOffset || 0;
+    if (y > 35) {
+      navPill.classList.add('scrolled');
+    } else {
+      navPill.classList.remove('scrolled');
+    }
+  };
+
+  window.addEventListener('scroll', updateNav, { passive: true });
+  if (typeof lenisInstance !== 'undefined' && lenisInstance) {
+    lenisInstance.on('scroll', updateNav);
+  }
+  updateNav();
 }

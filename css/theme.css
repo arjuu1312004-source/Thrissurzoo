@@ -216,35 +216,46 @@ a {
   align-items: center;
   justify-content: space-between;
   gap: 24px;
-  background: rgba(255, 255, 255, 0.88);
-  backdrop-filter: blur(18px);
-  -webkit-backdrop-filter: blur(18px);
-  border: 1px solid rgba(230, 228, 223, 0.8);
+  background: rgba(12, 26, 20, 0.28);
+  backdrop-filter: blur(20px) saturate(160%);
+  -webkit-backdrop-filter: blur(20px) saturate(160%);
+  border: 1px solid rgba(255, 255, 255, 0.24);
   padding: 8px 14px 8px 20px;
   border-radius: var(--radius-pill);
-  box-shadow: 0 10px 35px rgba(20, 52, 42, 0.08), 0 1px 3px rgba(0, 0, 0, 0.04);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.25), 0 1px 3px rgba(0, 0, 0, 0.12);
   max-width: 980px;
   width: 100%;
-  transition: var(--transition-smooth);
+  transition: background 0.35s ease, border-color 0.35s ease, box-shadow 0.35s ease, transform 0.35s ease;
+}
+
+.nav-pill.scrolled {
+  background: rgba(10, 24, 18, 0.85);
+  backdrop-filter: blur(24px) saturate(180%);
+  -webkit-backdrop-filter: blur(24px) saturate(180%);
+  border-color: rgba(255, 255, 255, 0.16);
+  box-shadow: 0 14px 40px rgba(0, 0, 0, 0.38);
 }
 
 .nav-logo-group {
   display: flex;
   align-items: center;
   gap: 12px;
+  text-decoration: none;
 }
 
 .nav-logo-group img {
   height: 38px;
   width: auto;
+  filter: drop-shadow(0 2px 5px rgba(0, 0, 0, 0.45));
 }
 
 .nav-logo-text {
   font-family: var(--font-serif);
   font-size: 1.15rem;
   font-weight: 700;
-  color: var(--color-green);
+  color: #FFFFFF;
   line-height: 1;
+  text-shadow: 0 1px 6px rgba(0, 0, 0, 0.75);
 }
 
 .nav-logo-sub {
@@ -252,10 +263,11 @@ a {
   font-family: var(--font-sans);
   font-size: 0.65rem;
   text-transform: uppercase;
-  letter-spacing: 0.12em;
-  color: var(--color-gold);
+  letter-spacing: 0.13em;
+  color: #E5C158;
   margin-top: 3px;
   font-weight: 700;
+  text-shadow: 0 1px 4px rgba(0, 0, 0, 0.65);
 }
 
 .nav-menu {
@@ -267,40 +279,49 @@ a {
 
 .nav-link {
   font-size: 0.85rem;
-  font-weight: 500;
-  color: var(--color-charcoal);
+  font-weight: 600;
+  color: rgba(255, 255, 255, 0.92);
   padding: 8px 14px;
   border-radius: var(--radius-pill);
   transition: var(--transition-smooth);
+  text-shadow: 0 1px 4px rgba(0, 0, 0, 0.7);
+  border: 1px solid transparent;
 }
 
 .nav-link:hover {
-  color: var(--color-green);
-  background: rgba(20, 52, 42, 0.05);
+  color: #FFFFFF;
+  background: rgba(255, 255, 255, 0.16);
+  text-shadow: 0 1px 6px rgba(0, 0, 0, 0.9);
 }
 
 .nav-link.active {
-  color: var(--color-green);
+  color: #FFFFFF;
   font-weight: 600;
+  background: rgba(255, 255, 255, 0.2);
+  border-color: rgba(255, 255, 255, 0.35);
+  text-shadow: 0 1px 6px rgba(0, 0, 0, 0.9);
 }
 
 .nav-cta-btn {
-  background-color: var(--color-green);
-  color: var(--color-white) !important;
+  background: linear-gradient(135deg, #D4AF37 0%, #A8812D 100%);
+  color: #0C1A14 !important;
   font-size: 0.82rem;
-  font-weight: 600;
+  font-weight: 700;
   padding: 9px 20px;
   border-radius: var(--radius-pill);
   transition: var(--transition-smooth);
-  box-shadow: 0 3px 10px rgba(20, 52, 42, 0.15);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.28);
+  border: 1px solid rgba(255, 255, 255, 0.35);
   display: inline-flex;
   align-items: center;
   gap: 6px;
 }
 
 .nav-cta-btn:hover {
-  background-color: var(--color-green-hover);
+  background: linear-gradient(135deg, #F0D58C 0%, #C5A059 100%);
   transform: translateY(-1px);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.35);
+  border-color: rgba(255, 255, 255, 0.55);
 }
 
 /* Mobile Hamburger */
@@ -310,7 +331,8 @@ a {
   border: none;
   cursor: pointer;
   padding: 6px;
-  color: var(--color-green);
+  color: #FFFFFF;
+  filter: drop-shadow(0 1px 3px rgba(0, 0, 0, 0.65));
 }
 
 .mobile-nav-drawer {
@@ -1421,6 +1443,24 @@ a {
   }
   .inner-hero-title {
     font-size: 2rem;
+  }
+  .nav-wrapper {
+    top: 14px;
+    padding: 0 10px;
+  }
+  .nav-pill {
+    padding: 6px 12px 6px 14px;
+    gap: 12px;
+  }
+  .nav-logo-group img {
+    height: 32px;
+  }
+  .nav-logo-text {
+    font-size: 1.05rem;
+  }
+  .nav-cta-btn {
+    padding: 7px 14px;
+    font-size: 0.78rem;
   }
   .styled-tariff-table th, .styled-tariff-table td {
     padding: 12px 14px;
