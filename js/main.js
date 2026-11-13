@@ -52,18 +52,24 @@ function initSmoothScroll() {
    ============================================================================== */
 function initHeroVideo() {
   const video = document.getElementById('heroVideo');
-  const muteBtn = document.getElementById('heroMuteToggle');
 
   if (!video) return;
+
+  // Enforce silent background video
+  video.muted = true;
+  video.volume = 0;
 
   // Autoplay handler with fallback for mobile strict policies
   const startAutoplay = () => {
     video.muted = true;
+    video.volume = 0;
     const promise = video.play();
     if (promise !== undefined) {
       promise.catch(() => {
         // Retry playing once user taps or clicks anywhere on the page
         const resumeOnInteraction = () => {
+          video.muted = true;
+          video.volume = 0;
           video.play().catch(() => {});
           document.removeEventListener('touchstart', resumeOnInteraction);
           document.removeEventListener('click', resumeOnInteraction);
@@ -75,29 +81,6 @@ function initHeroVideo() {
   };
 
   startAutoplay();
-
-  // Audio mute/unmute control
-  if (muteBtn) {
-    const soundOnSvg = `
-      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-        <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon>
-        <path d="M19.07 4.93a10 10 0 0 1 0 14.14M15.54 8.46a5 5 0 0 1 0 7.07"></path>
-      </svg>`;
-    const soundOffSvg = `
-      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-        <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon>
-        <line x1="23" y1="9" x2="17" y2="15"></line>
-        <line x1="17" y1="9" x2="23" y2="15"></line>
-      </svg>`;
-
-    muteBtn.addEventListener('click', (e) => {
-      e.stopPropagation();
-      video.muted = !video.muted;
-      muteBtn.innerHTML = video.muted ? soundOffSvg : soundOnSvg;
-      muteBtn.setAttribute('title', video.muted ? 'Unmute Sound' : 'Mute Sound');
-      muteBtn.setAttribute('aria-label', video.muted ? 'Unmute Sound' : 'Mute Sound');
-    });
-  }
 }
 
 /* ==============================================================================
